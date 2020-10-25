@@ -1,15 +1,23 @@
-const express = require('express')
-const hbs = require('express-handlebars')
+const express = require("express");
+const hbs = require("express-handlebars");
+// import router routes
+const router = require("./router");
 
-const server = express()
+const server = express();
 
 // Middleware
-server.engine('hbs', hbs({
-  defaultLayout: 'main',
-  extname: 'hbs'
-}))
-server.set('view engine', 'hbs')
-server.use(express.static('public'))
-server.use(express.urlencoded({extended: false}))
+server.engine(
+  "hbs",
+  hbs({
+    defaultLayout: "main",
+    extname: "hbs",
+  })
+);
+server.set("view engine", "hbs");
+server.use(express.static("public"));
+server.use(express.urlencoded({ extended: false }));
 
-module.exports = server
+// allows router use
+server.use("/", router);
+
+module.exports = server;
